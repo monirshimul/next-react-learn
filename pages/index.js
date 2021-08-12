@@ -2,7 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Fragment, useState } from 'react';
 import Common from '../layout/common';
-import Card  from '../mainSection/card'
+import Card  from '../mainSection/card';
+import AccordionForm from '../mainSection/accordionForm'
 
 
 export default function Home() {
@@ -26,11 +27,26 @@ export default function Home() {
 
       id: 3,
       name: "Mehedi Hasan",
-      image: "mehedi.jfif",
+      image: "/mehedi.jfif",
       post: "ASE"
 
     }
   ])
+
+
+  const dataPass=(data)=>{
+    const shape = {
+      id:user[user.length - 1]["id"] + 1,
+      name: data.name,
+      image:"/eraLogo.png",
+      post: data.post
+    }
+
+    setUser([...user, shape])
+  }
+
+  console.log("USer", user)
+
 
 
   return (
@@ -49,6 +65,7 @@ export default function Home() {
               ))
             }
           </div>
+          <AccordionForm dataPass={dataPass}/>
         </div>
       </Fragment>
     </Common>
