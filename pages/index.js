@@ -79,19 +79,16 @@ export default function Home() {
                     ref={provided.innerRef}
                   >
                     {
-                      user.map((value, i) => (
+                      user.map((value, ind) => (
                         <Draggable
-                          draggableId={`draggable-${i}`}
-                          index={i}
-                          key={`draggable-${i}`}
+                          draggableId={`draggableId-${ind}`}
+                          index={ind}
+                          key={`draggableKey-${ind}`}
                         >
                           {
                             (provided) => (
                               <div
                                 className={`card col-sm-4 p-3`}
-                                style={{
-                                  boxShadow: "rgba(0, 0, 0, 0.25) 0px 25px 50px -12px"
-                                }}
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                                 ref={provided.innerRef}
