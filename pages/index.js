@@ -2,8 +2,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Fragment, useState } from 'react';
 import Common from '../layout/common';
-import Card  from '../mainSection/card';
+import Card from '../mainSection/card';
 import AccordionForm from '../mainSection/accordionForm'
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 
 export default function Home() {
@@ -34,11 +35,11 @@ export default function Home() {
   ])
 
 
-  const dataPass=(data)=>{
+  const dataPass = (data) => {
     const shape = {
-      id:user[user.length - 1]["id"] + 1,
+      id: user[user.length - 1]["id"] + 1,
       name: data.name,
-      image:"/eraLogo.png",
+      image: "/eraLogo.png",
       post: data.post
     }
 
@@ -47,25 +48,75 @@ export default function Home() {
 
   console.log("USer", user)
 
+  const dragEnd = (res) => {
+    console.log("res", res)
+    const usersArray = [...user]
+    const [orderUsers] = usersArray.splice(res.source.index, 1)
+    usersArray.splice(res.destination.index, 0, orderUsers);
+
+    setUser(usersArray);
+  }
+
 
 
   return (
     <Common>
       <Fragment>
         <div className="container mt-5">
-          <div className="row d-flex justify-content-center">
-            {
-              user.map(value=>(
-                <Card
-                  key={value.id}
-                  name={value.name}
-                  image={value.image}
-                  post={value.post}
-                />
-              ))
-            }
-          </div>
-          <AccordionForm dataPass={dataPass}/>
+          <DragDropContext
+            onDragEnd={dragEnd}
+          >
+            <Droppable
+              droppableId="someId"
+              direction="horizontal"
+              type="column"
+            >
+              {
+                (provided) => (
+                  <div
+                    className="row d-flex justify-content-center"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {
+                      user.map((value, i) => (
+                        <Draggable
+                          draggableId={`draggable-${i}`}
+                          index={i}
+                          key={`draggable-${i}`}
+                        >
+                          {
+                            (provided) => (
+                              <div
+                                className={`card col-sm-4 p-3`}
+                                style={{
+                                  boxShadow: "rgba(0, 0, 0, 0.25) 0px 25px 50px -12px"
+                                }}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                ref={provided.innerRef}
+                              >
+                                <Card
+                                  key={value.id}
+                                  name={value.name}
+                                  image={value.image}
+                                  post={value.post}
+                                />
+                              </div>
+                            )
+                          }
+
+                        </Draggable>
+                      ))
+                    }
+                    {provided.placeholder}
+                  </div>
+                )
+              }
+
+            </Droppable>
+          </DragDropContext>
+          <AccordionForm dataPass={dataPass} />
         </div>
       </Fragment>
     </Common>
