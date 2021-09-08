@@ -5,6 +5,7 @@ import Common from '../layout/common';
 import Card from '../mainSection/card';
 import AccordionForm from '../mainSection/accordionForm'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import NoSSR from 'react-no-ssr';
 
 
 export default function Home() {
@@ -60,62 +61,64 @@ export default function Home() {
 
 
   return (
-    <Common>
-      <Fragment>
-        <div className="container mt-5">
-          <DragDropContext
-            onDragEnd={dragEnd}
-          >
-            <Droppable
-              droppableId="someId"
-              direction="horizontal"
-              type="column"
+    <NoSSR>
+      <Common>
+        <Fragment>
+          <div className="container mt-5">
+            <DragDropContext
+              onDragEnd={dragEnd}
             >
-              {
-                (provided) => (
-                  <div
-                    className="row d-flex justify-content-center"
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    {
-                      user.map((value, ind) => (
-                        <Draggable
-                          draggableId={`draggableId-${ind}`}
-                          index={ind}
-                          key={`draggableKey-${ind}`}
-                        >
-                          {
-                            (provided) => (
-                              <div
-                                className={`card col-sm-4 p-3`}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                ref={provided.innerRef}
-                              >
-                                <Card
-                                  key={value.id}
-                                  name={value.name}
-                                  image={value.image}
-                                  post={value.post}
-                                />
-                              </div>
-                            )
-                          }
+              <Droppable
+                droppableId="someId"
+                direction="horizontal"
+                type="column"
+              >
+                {
+                  (provided) => (
+                    <div
+                      className="row d-flex justify-content-center"
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                    >
+                      {
+                        user.map((value, ind) => (
+                          <Draggable
+                            draggableId={`draggableId-${ind}`}
+                            index={ind}
+                            key={`draggableKey-${ind}`}
+                          >
+                            {
+                              (provided) => (
+                                <div
+                                  className={`card col-sm-4 p-3`}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  ref={provided.innerRef}
+                                >
+                                  <Card
+                                    key={value.id}
+                                    name={value.name}
+                                    image={value.image}
+                                    post={value.post}
+                                  />
+                                </div>
+                              )
+                            }
 
-                        </Draggable>
-                      ))
-                    }
-                    {provided.placeholder}
-                  </div>
-                )
-              }
+                          </Draggable>
+                        ))
+                      }
+                      {provided.placeholder}
+                    </div>
+                  )
+                }
 
-            </Droppable>
-          </DragDropContext>
-          <AccordionForm dataPass={dataPass} />
-        </div>
-      </Fragment>
-    </Common>
+              </Droppable>
+            </DragDropContext>
+            <AccordionForm dataPass={dataPass} />
+          </div>
+        </Fragment>
+      </Common>
+    </NoSSR>
   )
 }

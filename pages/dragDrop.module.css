@@ -1,0 +1,8 @@
+.editBtn{
+    opacity: 0.2;
+    transition: all ease 0.3s;
+}
+
+.editBtn:hover{
+    opacity: 1;
+}

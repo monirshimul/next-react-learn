@@ -1,28 +1,29 @@
 import React, { Fragment, useState } from 'react'
 
 const AccordionForm = props => {
+    console.log("props", props)
 
-    const {dataPass} = props
+    const { dataPass } = props
     const [user, setUser] = useState({
-        name:"",
-        post:""
+        name: "",
+        post: ""
     })
 
-    const handleChange = (e)=>{
-        setUser({...user, [e.target.name] : e.target.value })
+    const handleChange = (e) => {
+        setUser({ ...user, [e.target.name]: e.target.value })
     }
 
-    const onDataSubmit = ()=>{
+    const onDataSubmit = () => {
         dataPass(user)
         setUser({
-            name:"",
-            post:""
+            name: "",
+            post: ""
         })
 
     }
 
 
-    const {name, post} = user
+    const { name, post } = user
     console.log(name, post)
     return (
         <Fragment>
@@ -44,20 +45,20 @@ const AccordionForm = props => {
                                 <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                     <div className="accordion-body">
                                         {/* input form */}
-                                        
-                                            <div className="mb-3">
-                                                <label htmlFor="exampleInputEmail1" className="form-label">Full Name</label>
-                                                <input type="text" value={name} name="name" onChange={handleChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                                                <div id="emailHelp" className="form-text">Provide Your Name</div>
-                                            </div>
-                                            <div className="mb-3">
-                                                <label htmlFor="exampleInputEmail1" className="form-label">Designation</label>
-                                                <input type="text" value={post} name="post" onChange={handleChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                                                <div id="emailHelp" className="form-text">Provide Your Designation</div>
-                                            </div>
-                                            
-                                            <button onClick={onDataSubmit} className="btn btn-primary">Submit</button>
-                                        
+
+                                        <div className="mb-3">
+                                            <label htmlFor="exampleInputEmail1" className="form-label">Full Name</label>
+                                            <input type="text" value={name} name="name" onChange={handleChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                            <div id="emailHelp" className="form-text">Provide Your Name</div>
+                                        </div>
+                                        <div className="mb-3">
+                                            <label htmlFor="exampleInputEmail1" className="form-label">Designation</label>
+                                            <input type="text" value={post} name="post" onChange={handleChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                            <div id="emailHelp" className="form-text">Provide Your Designation</div>
+                                        </div>
+
+                                        <button onClick={onDataSubmit} className="btn btn-primary">Submit</button>
+
                                     </div>
                                 </div>
                             </div>
