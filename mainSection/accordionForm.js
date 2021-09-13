@@ -1,6 +1,11 @@
 import React, { Fragment, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addUser } from '../redux/slices/UserSlice';
+
 
 const AccordionForm = props => {
+
+    const dispatch = useDispatch();
     console.log("props", props)
 
     const { dataPass } = props
@@ -13,7 +18,12 @@ const AccordionForm = props => {
         setUser({ ...user, [e.target.name]: e.target.value })
     }
 
-    const onDataSubmit = () => {
+    const onDataSubmit = (e) => {
+        e.preventDefault();
+        const {name, post} = user;
+        dispatch(addUser({name, post}))
+
+
         dataPass(user)
         setUser({
             name: "",

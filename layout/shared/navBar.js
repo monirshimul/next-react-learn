@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
 
 const navBar = () => {
+    const user = useSelector((state)=> state.user)
     return (
         <Fragment>
             <div className="container">
@@ -51,7 +53,7 @@ const navBar = () => {
                                         fontFamily: "'Rubik', sans-serif",
                                     }}
                                 >
-                                    Home
+                                    {user.name}
                                 </a>
                             </Link>
                             <Link href="/">
@@ -65,7 +67,7 @@ const navBar = () => {
                                         fontFamily: "'Rubik', sans-serif",
                                     }}
                                 >
-                                    Features
+                                    {user.post}
                                 </a>
                             </Link>
                             <Link href="/">

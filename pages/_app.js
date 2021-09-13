@@ -3,10 +3,14 @@ import Head from 'next/head';
 import { Fragment } from 'react';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import {Provider} from 'react-redux'
+import store from '../redux/store'
 function MyApp({ Component, pageProps }) {
 
   return (
+    <Provider store={store}>
     <DndProvider backend={HTML5Backend}>
+      
       <Fragment>
         <Head>
           <meta charSet="utf-8" />
@@ -26,6 +30,7 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </Fragment>
     </DndProvider>
+    </Provider>
   )
 }
 
