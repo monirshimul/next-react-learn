@@ -1,28 +1,25 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Element from '../mainSection/Element';
+import {UserAdd, UserDelete} from '../redux/slices/DynamicUserSlice'
+
+
+
+
 
 const AddElement = () => {
 
-    const [elArr, setElArr] = useState([<Element />])
+    const user = useSelector((state)=>state.DynamicUser.user);
+    console.log("USer", user)
+    const dispatch = useDispatch();
 
-    const addEle = ()=>{
-        console.log("new Array", elArr)
-        setElArr([
-            ...elArr,
-            <Element/>
-        ])
+
+    const addUser = (e)=>{
+        dispatch(UserAdd())
     }
 
-    const remove = ()=>{
-
-        const newArr = [...elArr]
-        
-        newArr.pop()
-        
-        setElArr([...newArr]);
-            
-
-
+    const removeUser = (e)=>{
+        dispatch(UserDelete())
     }
 
 
@@ -30,19 +27,16 @@ const AddElement = () => {
         <Fragment>
             <div className="container mt-2">
                 <div className="row justify-content-center">
-                    <div className="col-sm-10" style={{border:"1px dashed gray", paddingTop:"50px", paddingBottom:"50px"}}>
+                    <div className="col-sm-10" style={{ border: "1px dashed gray", paddingTop: "50px", paddingBottom: "50px" }}>
                         {
-                            elArr.map((val, ind) => (
-                                <>
-                                    {val}
-
-                                </>
-                            ))
+                            user.map((val, ind) => {
+                                return <Element index={ind} key={ind}/>
+                            })
                         }
                     </div>
-                    <div className="col-sm-2 text-center" style={{border:"1px dashed gray", paddingTop:"50px"}}>
-                    <button onClick={addEle} className="btn btn-primary mb-2">Add More</button>
-                    <button onClick={remove} className="btn btn-primary">Delete</button>
+                    <div className="col-sm-2 text-center" style={{ border: "1px dashed gray", paddingTop: "50px" }}>
+                        <button onClick={addUser} className="btn btn-primary mb-2">Add More</button>
+                        <button onClick={removeUser} className="btn btn-primary">Delete</button>
                     </div>
                 </div>
 
