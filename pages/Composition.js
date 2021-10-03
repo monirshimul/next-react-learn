@@ -8,7 +8,7 @@ const Composition = () => {
         <Parent>
             {
                 ({ parentToChild }) => 
-                <ParentTwo>
+                <ParentTwo motherFunc={parentToChild}>
                     {
                         ({ parentTwoToChild }) => <Child receiveFromParent={parentToChild} receiveFromParentTwo={parentTwoToChild} />
                     }

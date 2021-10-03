@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 const Parent = (props) => {
     const funcPassToChild = (a , b)=>{
-        return a + b;
+        return `Hello ${a} & ${b}, `
     }
     return (
         <Fragment>

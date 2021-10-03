@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
 
 const ParentTwo = (props) => {
+    console.log("Mother Func", props)
 
     const anotherFuncPassToChild = (func)=>{
-        return func * 2
+        return `${func} Let's build a App Together.`
     }
 
     return (
