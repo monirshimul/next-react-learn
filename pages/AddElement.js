@@ -35,8 +35,8 @@ const AddElement = () => {
                         }
                     </div>
                     <div className="col-sm-2 text-center" style={{ border: "1px dashed gray", paddingTop: "50px" }}>
-                        <button onClick={addUser} className="btn btn-primary mb-2">Add More</button>
-                        <button onClick={removeUser} className="btn btn-primary">Delete</button>
+                        <button onClick={addUser} className="btn btn-primary m-2">Add</button>
+                        <button onClick={removeUser} className="btn btn-primary m-2">Delete</button>
                     </div>
                 </div>
 
