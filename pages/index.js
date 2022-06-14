@@ -53,8 +53,9 @@ export default function Home() {
     console.log("res", res)
     const usersArray = [...user]
     const [orderUsers] = usersArray.splice(res.source.index, 1)
+    console.log("orderUsers", orderUsers)
     usersArray.splice(res.destination.index, 0, orderUsers);
-
+    console.log("usersArray", usersArray)
     setUser(usersArray);
   }
 
